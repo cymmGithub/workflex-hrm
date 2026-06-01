@@ -1,0 +1,20 @@
+{
+  "name": "workflex-hrm",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.5.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @workflex/api dev",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "migrate": "pnpm --filter @workflex/api migrate",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.8.3"
+  }
+}
