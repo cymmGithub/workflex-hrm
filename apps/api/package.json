@@ -9,9 +9,21 @@
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
     "test": "vitest run",
-    "migrate": "node-pg-migrate up -j ts -m src/db/migrations",
-    "migrate:create": "node-pg-migrate create -j ts -m src/db/migrations"
+    "migrate": "NODE_OPTIONS='--import tsx' node-pg-migrate up -m src/db/migrations -j ts --envPath .env",
+    "migrate:down": "NODE_OPTIONS='--import tsx' node-pg-migrate down -m src/db/migrations -j ts --envPath .env",
+    "migrate:create": "node-pg-migrate create -m src/db/migrations -j ts",
+    "seed": "node --env-file=.env --import tsx src/db/seed.ts"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "node-pg-migrate": "^8.0.4",
+    "pg": "^8.21.0",
+    "uuid": "^14.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "@types/pg": "^8.20.0",
+    "dotenv": "^17.4.2",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
 }
