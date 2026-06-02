@@ -2,6 +2,7 @@ import Fastify, { type FastifyInstance } from 'fastify';
 import type { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import ajvFormats from 'ajv-formats';
 import dbPlugin from './plugins/db.js';
+import employeeRoutes from './routes/employees.js';
 
 export async function buildApp(): Promise<FastifyInstance> {
   const app = Fastify({
@@ -15,10 +16,9 @@ export async function buildApp(): Promise<FastifyInstance> {
 
   await app.register(dbPlugin);
 
-  app.get('/health', () => ({ status: 'ok' }));
+  app.get('/api/health', () => ({ status: 'ok' }));
 
-  // TODO(you): register feature routes here (group 4), e.g.
-  //   await app.register(employeeRoutes, { prefix: '/api/employees' });
+  await app.register(employeeRoutes, { prefix: '/api/employees' });
 
   return app;
 }
